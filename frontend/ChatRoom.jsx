@@ -40,16 +40,6 @@ class ChatRoom extends React.Component {
       return <li key={idx}>{message}</li>;
     });
 
-    // let messageList;
-    //
-    // if (this.props) {
-    //   messageList = this.props.messages.map((message, idx) => {
-    //     return <li key={idx}>{message}</li>;
-    //   });
-    // } else {
-    //   messageList = [];
-    // }
-
     return (
       <div>
         <div>

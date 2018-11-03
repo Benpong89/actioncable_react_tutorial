@@ -8,6 +8,7 @@ class Message extends React.Component {
       body: ""
     };
   }
+
   update(field) {
     return e =>
       this.setState({
