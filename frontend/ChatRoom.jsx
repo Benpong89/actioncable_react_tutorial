@@ -15,10 +15,20 @@ class ChatRoom extends React.Component {
       { channel: "ChatChannel", room: "ChatRoom" },
       {
         received: data => {
-          const messages = data["messages"];
-          this.setState({
-            messages: messages
-          });
+          switch (data.type) {
+            case "message":
+              let oldMessages = this.state.messages.slice();
+              let newMessages = oldMessages.concat(data.message);
+              this.setState({
+                messages: newMessages
+              });
+              break;
+            case "messages":
+              this.setState({
+                messages: data.messages
+              });
+              break;
+          }
         },
         speak: function(data) {
           return this.perform("speak", data);
