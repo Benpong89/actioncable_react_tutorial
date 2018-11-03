@@ -8,6 +8,8 @@ class ChatRoom extends React.Component {
     this.state = {
       messages: []
     };
+
+    this.bottom = React.createRef();
   }
 
   componentDidMount() {
@@ -17,10 +19,8 @@ class ChatRoom extends React.Component {
         received: data => {
           switch (data.type) {
             case "message":
-              let oldMessages = this.state.messages.slice();
-              let newMessages = oldMessages.concat(data.message);
               this.setState({
-                messages: newMessages
+                messages: this.state.messages.concat(data.message)
               });
               break;
             case "messages":
@@ -40,23 +40,31 @@ class ChatRoom extends React.Component {
     );
   }
 
-  handleSubmit(e) {
+  loadChat(e) {
     e.preventDefault();
     App.cable.subscriptions.subscriptions[0].load();
   }
 
+  componentDidUpdate() {
+    this.bottom.current.scrollIntoView();
+  }
+
   render() {
     const messageList = this.state.messages.map((message, idx) => {
-      return <li key={idx}>{message}</li>;
+      return (
+        <li key={idx}>
+          {message} <div ref={this.bottom} />
+        </li>
+      );
     });
 
     return (
-      <div>
-        <div>
-          ChatRoom
-          <button onClick={this.handleSubmit.bind(this)}>Open Chat</button>
-        </div>
-        <div>{messageList}</div>
+      <div className="chatroom-container">
+        <div>ChatRoom</div>
+        <button className="load-button" onClick={this.loadChat.bind(this)}>
+          Load Chat History
+        </button>
+        <div className="message-list">{messageList}</div>
         <Message />
       </div>
     );

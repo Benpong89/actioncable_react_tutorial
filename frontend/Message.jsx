@@ -28,14 +28,15 @@ class Message extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="message-form">
         <form onSubmit={this.handleSubmit.bind(this)}>
           <input
             type="text"
             value={this.state.body}
             onChange={this.update("body")}
+            placeholder="Type message here"
           />
-          <button type="submit" />
+          <input className="hidden" type="submit" />
         </form>
       </div>
     );
