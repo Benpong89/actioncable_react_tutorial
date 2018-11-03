@@ -7,10 +7,7 @@ class Message extends React.Component {
     this.state = {
       body: ""
     };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
-
   update(field) {
     return e =>
       this.setState({
@@ -23,12 +20,15 @@ class Message extends React.Component {
     App.cable.subscriptions.subscriptions[0].speak({
       message: this.state.body
     });
+    this.setState({
+      body: ""
+    });
   }
 
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit.bind(this)}>
           <input
             type="text"
             value={this.state.body}

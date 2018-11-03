@@ -6,10 +6,8 @@ class ChatRoom extends React.Component {
     super(props);
 
     this.state = {
-      TextInput: ""
+      messages: []
     };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -19,7 +17,7 @@ class ChatRoom extends React.Component {
         received: data => {
           const messages = data["messages"];
           this.setState({
-            Messages: messages
+            messages: messages
           });
         },
         speak: function(data) {
@@ -38,17 +36,27 @@ class ChatRoom extends React.Component {
   }
 
   render() {
-    const list = this.state.Messages
-      ? this.state.Messages.map((message, idx) => {
-          return <li key={idx}>{message}</li>;
-        })
-      : null;
+    const messageList = this.state.messages.map((message, idx) => {
+      return <li key={idx}>{message}</li>;
+    });
+
+    // let messageList;
+    //
+    // if (this.props) {
+    //   messageList = this.props.messages.map((message, idx) => {
+    //     return <li key={idx}>{message}</li>;
+    //   });
+    // } else {
+    //   messageList = [];
+    // }
 
     return (
       <div>
-        <div>ChatRoom</div>
-        <div>{list}</div>
-        <button onClick={this.handleSubmit}>Open Chat</button>
+        <div>
+          ChatRoom
+          <button onClick={this.handleSubmit.bind(this)}>Open Chat</button>
+        </div>
+        <div>{messageList}</div>
         <Message />
       </div>
     );
