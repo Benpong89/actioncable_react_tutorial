@@ -1,5 +1,5 @@
 * {
-  margin: 5px;
+  margin: 2px;
   padding: 5px;
 }
 
@@ -20,15 +20,8 @@ li {
   border: solid gray 1px;
 }
 
-.message-form {
-}
-
 .load-button {
   position: absolute;
-  top: -5px;
-  right: -5px;
-}
-
-.hidden {
-  display: none;
+  top: 5px;
+  right: 5px;
 }

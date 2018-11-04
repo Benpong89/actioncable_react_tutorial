@@ -28,7 +28,7 @@ class Message extends React.Component {
 
   render() {
     return (
-      <div className="message-form">
+      <div>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <input
             type="text"
@@ -36,7 +36,7 @@ class Message extends React.Component {
             onChange={this.update("body")}
             placeholder="Type message here"
           />
-          <input className="hidden" type="submit" />
+          <input type="submit" />
         </form>
       </div>
     );
