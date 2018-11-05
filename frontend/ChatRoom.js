@@ -1,5 +1,5 @@
 import React from "react";
-import Message from "./Message.jsx";
+import Message from "./Message.js";
 
 class ChatRoom extends React.Component {
   constructor(props) {
