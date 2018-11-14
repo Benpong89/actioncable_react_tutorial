@@ -1,5 +1,5 @@
 import React from "react";
-import Message from "./Message.js";
+import MessageForm from "./Message.js";
 
 class ChatRoom extends React.Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class ChatRoom extends React.Component {
 
   componentDidMount() {
     App.cable.subscriptions.create(
-      { channel: "ChatChannel", room: "ChatRoom" },
+      { channel: "ChatChannel" },
       {
         received: data => {
           switch (data.type) {
@@ -50,9 +50,9 @@ class ChatRoom extends React.Component {
   }
 
   render() {
-    const messageList = this.state.messages.map((message, idx) => {
+    const messageList = this.state.messages.map(message => {
       return (
-        <li key={idx}>
+        <li key={message.id}>
           {message} <div ref={this.bottom} />
         </li>
       );
@@ -65,7 +65,7 @@ class ChatRoom extends React.Component {
           Load Chat History
         </button>
         <div className="message-list">{messageList}</div>
-        <Message />
+        <MessageForm />
       </div>
     );
   }
